@@ -1,5 +1,7 @@
 on:
   push:
+    branches:
+      - 3.3.5
 
 jobs:
   build:
@@ -9,7 +11,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git clang cmake make gcc g++ libmariadbclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev mariadb-server p7zip libmariadb-client-lgpl-dev-compat
+        sudo apt-get install git clang cmake make gcc g++ libssl-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev p7zip libmariadb-client-lgpl-dev-compat
         sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
         sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang 100
     - name: Create User
