@@ -36,4 +36,4 @@ jobs:
       uses: 'actions/upload-artifact@v2'
       with:
         name: binaries
-        path: bin/check_install
+        path: './'
