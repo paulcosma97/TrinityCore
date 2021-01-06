@@ -16,8 +16,9 @@ jobs:
       run: |
         sudo adduser trinity
         sudo su trinity
-    - name: Build Server
+    - name: Checkout Sources
       uses: actions/checkout@v2
+    - name: Build Sources
       run: |
         mkdir build
         cd build
