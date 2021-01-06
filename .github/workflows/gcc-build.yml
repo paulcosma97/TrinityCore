@@ -32,3 +32,8 @@ jobs:
         cd bin/check_install/bin
         ./authserver --version
         ./worldserver --version
+    - name: Upload Artifacts
+      uses: 'actions/upload-artifact@v2'
+      with:
+        name: binaries
+        path: bin/check_install

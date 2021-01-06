@@ -1,32 +1,32 @@
-on:
-  push:
-    branches:
-      - 3.3.5
+# on:
+#   push:
+#     branches:
+#       - 3.3.5
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: Build Artifacts
-    steps:
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install git clang cmake make gcc g++ libssl-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev p7zip libmariadb-client-lgpl-dev-compat
-        sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-        sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang 100
-    - name: Checkout Sources
-      uses: actions/checkout@v2
-    - name: Build Sources
-      run: |
-        mkdir build
-        cd build
-        cmake ../ -DCMAKE_INSTALL_PREFIX=/home/runner/server -DTOOLS=0 -DWITH_WARNINGS=1
-        make -j $(nproc) install
-        pwd
-        ls -al
-        ls -al ../
-    - name: Upload Artifacts
-      uses: 'actions/upload-artifact@v2'
-      with:
-        name: binaries
-        path: /home/trinity/server
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     name: Build Artifacts
+#     steps:
+#     - name: Install Dependencies
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install git clang cmake make gcc g++ libssl-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev p7zip libmariadb-client-lgpl-dev-compat
+#         sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+#         sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang 100
+#     - name: Checkout Sources
+#       uses: actions/checkout@v2
+#     - name: Build Sources
+#       run: |
+#         mkdir build
+#         cd build
+#         cmake ../ -DCMAKE_INSTALL_PREFIX=/home/runner/server -DTOOLS=0 -DWITH_WARNINGS=1
+#         make -j $(nproc) install
+#         pwd
+#         ls -al
+#         ls -al ../
+#     - name: Upload Artifacts
+#       uses: 'actions/upload-artifact@v2'
+#       with:
+#         name: binaries
+#         path: /home/trinity/server
