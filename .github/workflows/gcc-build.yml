@@ -34,7 +34,8 @@ jobs:
         ./worldserver --version
     - name: Move binaries
       run: |
-        mkdir -p output/TrinityCore/TrinityCore/bin
+        mkdir -p output/TrinityCore/TrinityCore/sql
+        mkdir -p output/TrinityCore/TrinityCore/bin/check_install
         cp -R bin/check_install/* output/TrinityCore/TrinityCore/bin/check_install
         cp -R sql/* output/TrinityCore/TrinityCore/sql 
 
