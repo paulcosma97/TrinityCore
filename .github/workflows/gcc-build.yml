@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Dependencies
       run: |
-        sudo apt-get update && sudo apt-get install -yq libboost-all-dev
+        sudo apt-get update && sudo apt-get install -yq libboost-all-dev sshpass
         sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100 --slave /usr/bin/g++ g++ /usr/bin/g++-8
     - name: Setup
       run: |
@@ -52,6 +52,5 @@ jobs:
     
     - name: Transfer Binaries
       run: |
-        sudo apt install sshpass -y
         sshpass -p "$SERVER_SSH_KEY" scp ./output.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":~/work
         sshpass -p "$SERVER_SSH_KEY" ssh "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd ~/work && unzip output.zip && rm output.zip && exit'
