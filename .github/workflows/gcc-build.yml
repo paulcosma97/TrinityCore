@@ -44,3 +44,14 @@ jobs:
       with:
         name: binaries
         path: output
+    
+    - name: Zip Binaries
+      run: |
+        sudo apt install zip -y
+        zip -r output.zip output/
+    
+    - name: Transfer Binaries
+      run: |
+        sudo apt install sshpass -y
+        sshpass -p "$SERVER_SSH_KEY" scp ./output.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":~/work
+        sshpass -p "$SERVER_SSH_KEY" ssh "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd ~/work && unzip output.zip && rm output.zip && exit'
