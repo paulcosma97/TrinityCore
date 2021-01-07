@@ -41,7 +41,7 @@ jobs:
         cd bin/check_install/bin
         ./authserver --version
         ./worldserver --version
-    - name: Move binaries
+    - name: Create Directory Structure
       run: |
         mkdir -p output/TrinityCore/TrinityCore/sql
         mkdir -p output/TrinityCore/TrinityCore/bin/check_install
@@ -60,5 +60,5 @@ jobs:
         SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
         SERVER_IP_ADDR: ${{ secrets.SERVER_IP_ADDR }}
       run: |
-        sshpass -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p "$SERVER_SSH_KEY" scp ./output.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":~/work
-        sshpass -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p "$SERVER_SSH_KEY" ssh "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd ~/work && unzip -o output.zip && rm output.zip && exit'
+        sshpass -p "$SERVER_SSH_KEY" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./output.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":~/work
+        sshpass -p "$SERVER_SSH_KEY" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd ~/work && unzip -o output.zip && rm output.zip && exit'
