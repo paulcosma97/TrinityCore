@@ -43,15 +43,15 @@ jobs:
         ./worldserver --version
     - name: Create Directory Structure
       run: |
-        mkdir -p output/TrinityCore/TrinityCore/sql
-        mkdir -p output/TrinityCore/TrinityCore/bin/check_install
-        cp -R bin/check_install/* output/TrinityCore/TrinityCore/bin/check_install
-        cp -R sql/* output/TrinityCore/TrinityCore/sql 
+        mkdir -p TrinityCore/TrinityCore/sql
+        mkdir -p TrinityCore/TrinityCore/bin/check_install
+        cp -R bin/check_install/* TrinityCore/TrinityCore/bin/check_install
+        cp -R sql/* TrinityCore/TrinityCore/sql 
     
     - name: Zip Binaries
       run: |
         sudo apt install zip -y
-        zip -r TrinityCore.zip output/
+        zip -r TrinityCore.zip TrinityCore/
     
     - name: Transfer Binaries
       shell: bash
@@ -61,4 +61,4 @@ jobs:
         SERVER_IP_ADDR: ${{ secrets.SERVER_IP_ADDR }}
       run: |
         sshpass -p "$SERVER_SSH_KEY" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./TrinityCore.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":/home/runner/work
-        sshpass -p "$SERVER_SSH_KEY" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd /home/runner/work && unzip -o TrinityCore.zip && service wow-world restart && exit'
+        sshpass -p "$SERVER_SSH_KEY" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" '/bin/bash /home/runner/deploy.sh && exit'
