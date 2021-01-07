@@ -47,12 +47,6 @@ jobs:
         mkdir -p output/TrinityCore/TrinityCore/bin/check_install
         cp -R bin/check_install/* output/TrinityCore/TrinityCore/bin/check_install
         cp -R sql/* output/TrinityCore/TrinityCore/sql 
-
-    - name: Upload Artifacts
-      uses: 'actions/upload-artifact@v2'
-      with:
-        name: binaries
-        path: output
     
     - name: Zip Binaries
       run: |
