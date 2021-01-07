@@ -61,4 +61,4 @@ jobs:
         SERVER_IP_ADDR: ${{ secrets.SERVER_IP_ADDR }}
       run: |
         sshpass -p "$SERVER_SSH_KEY" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./TrinityCore.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":/home/runner/work
-        sshpass -p "$SERVER_SSH_KEY" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd /home/runner/work && unzip -o TrinityCore.zip && rm TrinityCore.zip && service wow-world restart && exit'
+        sshpass -p "$SERVER_SSH_KEY" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd /home/runner/work && unzip -o TrinityCore.zip && service wow-world restart && exit'
