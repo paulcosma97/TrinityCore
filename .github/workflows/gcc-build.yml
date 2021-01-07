@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Print
-          shell: bash
+      shell: bash
       env:
         SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
         SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
