@@ -10,6 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Print
+          shell: bash
+      env:
+        SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
+        SERVER_IP_ADDR: ${{ secrets.SERVER_IP_ADDR }}
       run: |
         echo "$SERVER_SSH_USER"@"$SERVER_IP_ADDR"
         echo "$SERVER_SSH_USER@$SERVER_IP_ADDR"
@@ -55,6 +60,11 @@ jobs:
         zip -r output.zip output/
     
     - name: Transfer Binaries
+      shell: bash
+      env:
+        SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        SERVER_SSH_USER: ${{ secrets.SERVER_SSH_USER }}
+        SERVER_IP_ADDR: ${{ secrets.SERVER_IP_ADDR }}
       run: |
         sshpass -p "$SERVER_SSH_KEY" scp ./output.zip "$SERVER_SSH_USER"@"$SERVER_IP_ADDR":~/work
         sshpass -p "$SERVER_SSH_KEY" ssh "$SERVER_SSH_USER"@"$SERVER_IP_ADDR" 'cd ~/work && unzip output.zip && rm output.zip && exit'
