@@ -32,8 +32,14 @@ jobs:
         cd bin/check_install/bin
         ./authserver --version
         ./worldserver --version
+    - name: Move binaries
+      run: |
+        mkdir -p output/TrinityCore/TrinityCore/bin
+        cp -R bin/check_install/* output/TrinityCore/TrinityCore/bin/check_install
+        cp -R sql/* output/TrinityCore/TrinityCore/sql 
+
     - name: Upload Artifacts
       uses: 'actions/upload-artifact@v2'
       with:
         name: binaries
-        path: './'
+        path: output
