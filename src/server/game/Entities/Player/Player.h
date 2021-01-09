@@ -1593,6 +1593,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         bool UpdateAllStats() override;
         void ApplySpellPenetrationBonus(int32 amount, bool apply);
         void UpdateResistances(uint32 school) override;
+        int32 GetArmor();
         void UpdateArmor() override;
         void UpdateMaxHealth() override;
         void UpdateMaxPower(Powers power) override;

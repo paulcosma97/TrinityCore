@@ -257,7 +257,7 @@ void Player::UpdateResistances(uint32 school)
         UpdateArmor();
 }
 
-void Player::UpdateArmor()
+int32 Player::GetArmor()
 {
     UnitMods unitMod = UNIT_MOD_ARMOR;
 
@@ -275,8 +275,13 @@ void Player::UpdateArmor()
     }
 
     value *= GetPctModifierValue(unitMod, TOTAL_PCT);
+    return int32(value);
+}
 
-    SetArmor(int32(value));
+void Player::UpdateArmor()
+{
+    int32 armor = GetArmor();
+    SetArmor(value);
 
     Pet* pet = GetPet();
     if (pet)
