@@ -281,7 +281,7 @@ int32 Player::GetArmor()
 void Player::UpdateArmor()
 {
     int32 armor = GetArmor();
-    SetArmor(value);
+    SetArmor(armor);
 
     Pet* pet = GetPet();
     if (pet)
