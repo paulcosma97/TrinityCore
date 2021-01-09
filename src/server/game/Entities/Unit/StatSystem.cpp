@@ -257,27 +257,6 @@ void Player::UpdateResistances(uint32 school)
         UpdateArmor();
 }
 
-int32 Player::GetArmor()
-{
-    UnitMods unitMod = UNIT_MOD_ARMOR;
-
-    float value = GetFlatModifierValue(unitMod, BASE_VALUE);    // base armor (from items)
-    value *= GetPctModifierValue(unitMod, BASE_PCT);            // armor percent from items
-    value += GetStat(STAT_AGILITY) * 2.0f;                      // armor bonus from stats
-    value += GetFlatModifierValue(unitMod, TOTAL_VALUE);
-
-    //add dynamic flat mods
-    AuraEffectList const& mResbyIntellect = GetAuraEffectsByType(SPELL_AURA_MOD_RESISTANCE_OF_STAT_PERCENT);
-    for (AuraEffectList::const_iterator i = mResbyIntellect.begin(); i != mResbyIntellect.end(); ++i)
-    {
-        if ((*i)->GetMiscValue() & SPELL_SCHOOL_MASK_NORMAL)
-            value += CalculatePct(GetStat(Stats((*i)->GetMiscValueB())), (*i)->GetAmount());
-    }
-
-    value *= GetPctModifierValue(unitMod, TOTAL_PCT);
-    return int32(value);
-}
-
 void Player::UpdateArmor()
 {
     int32 armor = GetArmor();
